@@ -7,7 +7,7 @@ export default function Home() {
     return (
         <>
             <div
-                className="w-full h-[450px] bg-cover bg-center bg-no-repeat m-auto"
+                className="w-full h-[550px] bg-cover bg-center bg-no-repeat m-auto"
                 style={{
                     backgroundImage: `url(${Landing})`,
                 }}
