@@ -6,6 +6,8 @@ import "./index.css";
 import App from "./App.jsx";
 import Home from "./pages/HomePage.jsx";
 import OS from './pages/OS.jsx'
+import SBD from "./pages/SBD.jsx";
+import DMJ from "./pages/DMJ.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const router = createBrowserRouter([
       {
         path: "/os",
         element: <OS />,
+      },
+      {
+        path: "/sbd",
+        element: <SBD />,
+      },
+      {
+        path: "/dmj",
+        element: <DMJ />,
       },
     ],
   },

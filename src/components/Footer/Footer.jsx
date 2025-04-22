@@ -10,28 +10,31 @@ export default function Footer() {
                     <div className="w-[45%] h-[full] flex flex-col gap-2">
                         <div className="w-full h-[45%] flex flex-row gap-2 items-center">
                             <img src={Logo} className="w-[20%]" />
-                            <div className="w-full h-full flex flex-col justify-between text-justify">
-                                <p className="w-full text-white text text-2xl font-semibold">
+                            <div className="w-full h-full flex flex-col text-justify tracking-wide">
+                                <p className="w-full text-white text text-[2rem] font-semibold">
                                     Network Laboratory
                                 </p>
-                                <p className="w-full text-white text text-sm font-normal shadow-md">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s
+                                <p className="w-full text-white text text-[1rem] font-light">
+                                    #ConnectingUs
+                                </p>
+                                <p className="w-full text-white text text-[1rem] font-light">
+                                    #TakeThe<b className="font-extrabold">Net</b>Step
                                 </p>
                             </div>
                         </div>
                         <div className="w-full h-full flex flex-col gap-2">
                             <p className="text-xl text-white font-semibold">Office</p>
                             <div className="h-[30%]">
-                                <p className="text-sm text-white font-light text-justify">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                                <p className="text-sm text-white font-light text-justify">Electrical Engineering Department, 2nd floor Universitas Indonesia Depok, 16424</p>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <div className="w-full flex flex-row gap-2 items-center">
                                     <Phone size={15} color="white" />
-                                    <p className="text-sm text-white font-light text-justify">08812345678</p>
+                                    <p className="text-sm text-white font-light text-justify">@pyn7863d</p>
                                 </div>
                                 <div className="w-full flex flex-row gap-2 items-center">
                                     <Mail size={15} color="white" />
-                                    <p className="text-sm text-white font-light text-justify">example@gmai.com</p>
+                                    <p className="text-sm text-white font-light text-justify">netlab.dteftui@gmail.com</p>
                                 </div>
                             </div>
                         </div>
@@ -40,14 +43,14 @@ export default function Footer() {
                         <p className="text-white text-lg font-semibold">Follow Our Socials</p>
                         <div className="flex flex-row items-center gap-3 -ml-1">
                             <a>
-                            <Facebook size={20} color="white" />
+                                <Facebook size={20} color="white" />
                             </a>
                             <a href="https://www.linkedin.com/company/netlabui/">
                                 <Linkedin size={20} color="white" />
                             </a>
                             <a href="https://www.instagram.com/netlab.dteftui/">
 
-                            <Instagram size={20} color="white" />
+                                <Instagram size={20} color="white" />
                             </a>
                         </div>
                     </div>
