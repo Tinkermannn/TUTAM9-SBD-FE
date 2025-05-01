@@ -55,23 +55,23 @@ export default function Register() {
         
     };
 
-
-
     return (
         <>
-            <div className="w-full h-screen m-auto flex bg-gradient-to-bl from-blue-600 via-sky-500 to-blue-400">
-                <div className="w-full h-[600px] px-20 pt-[80px] flex items-center justify-start m-auto max-w-screen-2xl flex-row gap-0 ">
-                    <div className="w-[50%] h-full rounded-l-xl border-blue-800 border-solid border-2 shadow-xl px-5 py-5 text-left bg-white">
-                        <div className="w-full h-[11%] flex items-center flex-col">
-                            <p className="w-full font-semibold text-blue-800 text-2xl">
+            <div className="w-full min-h-screen m-auto flex bg-gradient-to-bl from-blue-600 via-sky-500 to-blue-400 max-md:px-4 max-md:py-8 max-md:items-center max-md:justify-center">
+                <div className="w-full h-[600px] px-20 pt-24 flex items-center justify-start m-auto max-w-screen-2xl flex-row gap-0 
+                    max-md:h-auto max-md:flex-col max-md:px-0 max-md:pt-0 max-md:w-full max-md:max-w-md">
+                    <div className="w-[50%] h-full rounded-l-xl border-blue-800 border-solid border-2 shadow-xl px-5 py-5 text-left bg-white
+                        max-md:w-full max-md:rounded-xl max-md:h-auto max-md:shadow-lg">
+                        <div className="w-full h-[11%] flex items-center flex-col max-md:h-auto max-md:mb-4">
+                            <p className="w-full font-semibold text-blue-800 text-2xl max-md:text-center">
                                 Sign Up
                             </p>
-                            <p className="w-full font-normal text-blue-800 text-sm">
+                            <p className="w-full font-normal text-blue-800 text-sm max-md:text-center max-md:mt-2">
                                 You can create an account to access our services.
                             </p>
                         </div>
-                        <form className="w-full h-[60%] py-5 grid grid-rows-4 gap-20" onSubmit={handleRegister}>
-                            <div>
+                        <form className="w-full h-[60%] py-5 grid grid-rows-4 gap-20 max-md:h-auto max-md:grid-rows-none max-md:gap-4" onSubmit={handleRegister}>
+                            <div className="max-md:px-4">
                                 <label className="font-semibold text-blue-700">Name</label>
                                 <input
                                     className="w-full h-10 border-solid border-blue-400 focus:border-blue-700 outline-none border-2 rounded-md py-2 px-2 mt-2"
@@ -82,7 +82,7 @@ export default function Register() {
                                     onChange={(e) => setName(e.target.value)}
                                 />
                             </div>
-                            <div>
+                            <div className="max-md:px-4">
                                 <label className="font-semibold text-blue-700">Email</label>
                                 <input
                                     className="w-full h-10 border-solid border-blue-400 focus:border-blue-700 outline-none border-2 rounded-md py-2 px-2 mt-2"
@@ -93,7 +93,7 @@ export default function Register() {
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>
-                            <div>
+                            <div className="max-md:px-4">
                                 <label className="font-semibold text-blue-700">Password</label>
                                 <div className="w-full flex flex-row justify-end">
                                     <input
@@ -105,13 +105,12 @@ export default function Register() {
                                         onChange={(e) => setPassword(e.target.value)}
                                     />
                                     <div className="w-5 h-10 absolute mt-2 flex items-center mr-2 cursor-pointer"
-                                        onClick={() => setShowPassword((prev) => !prev)} // CALLBACK
-                                    >
+                                        onClick={() => setShowPassword((prev) => !prev)}>
                                         {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                     </div>
                                 </div>
                             </div>
-                            <div>
+                            <div className="max-md:px-4">
                                 <label className="font-semibold text-blue-700">Confirm Password</label>
                                 <div className="w-full flex flex-row justify-end">
                                     <input
@@ -129,7 +128,7 @@ export default function Register() {
                                 </div>
                             </div>
 
-                            <div className="flex items-center justify-center mt-4 flex-col">
+                            <div className="flex items-center justify-center mt-1 flex-col max-md:px-4">
                                 <button className="w-full h-10 flex items-center bg-gradient-to-br from-blue-700 to-blue-500 shadow-md rounded-md justify-center" type="submit">
                                     <p className="text-white font-medium">Sign Up</p>
                                 </button>
@@ -146,10 +145,9 @@ export default function Register() {
                             {/* Menampilkan pesan error jika ada */}
                             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                         </form>
-
-
                     </div>
-                    <div className="w-[50%] h-full flex flex-col bg-cover rounded-r-xl bg-gradient-to-r from-blue-600 via-sky-500 to-blue-400 overflow-hidden">
+                    <div className="w-[50%] h-full flex flex-col bg-cover rounded-r-xl bg-gradient-to-r from-blue-600 via-sky-500 to-blue-400 overflow-hidden
+                        max-md:hidden">
                         <div className="w-full h-full bg-gradient-to-r">
                             <div className="w-full h-full flex items-center justify-center">
                                 <img src={Logo} className="scale-75 hover:scale-100 transition-transform duration-100" />

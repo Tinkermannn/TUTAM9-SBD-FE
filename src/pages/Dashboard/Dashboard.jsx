@@ -92,25 +92,25 @@ export default function Dashboard() {
 
     return (
         <>
-            <div className="w-full min-h-screen bg-gradient-to-br from-blue-700 via-sky-500 to-blue-400 flex justify-center px-20 pt-32">
-                <div className="w-full max-w-screen-2xl bg-white rounded-2xl shadow-2xl p-10 flex flex-col gap-10">
-                    <div className="flex gap-8">
-                        <div className="w-1/2 flex flex-col justify-between">
+            <div className="w-full min-h-screen bg-gradient-to-br from-blue-700 via-sky-500 to-blue-400 flex justify-center px-4 py-8 md:px-20 md:pt-32">
+                <div className="w-full max-w-screen-2xl bg-white rounded-2xl shadow-2xl p-4 md:p-10 flex flex-col gap-6 md:gap-10">
+                    <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+                        <div className="w-full md:w-1/2 flex flex-col justify-between mb-4 md:mb-0">
                             <div>
-                                <h2 className="text-3xl font-bold text-blue-800 mb-6">
+                                <h2 className="text-2xl md:text-3xl font-bold text-blue-800 mb-4 md:mb-6">
                                     Welcome, {userData.name}
                                 </h2>
-                                <div className="space-y-4 text-gray-800">
+                                <div className="space-y-3 md:space-y-4 text-gray-800">
                                     <div>
-                                        <label className="font-semibold">Email:</label>
+                                        <label className="font-semibold block">Email:</label>
                                         <p>{userData.email}</p>
                                     </div>
                                     <div>
-                                        <label className="font-semibold">Balance:</label>
+                                        <label className="font-semibold block">Balance:</label>
                                         <p>Rp {userData.balance.toLocaleString()}</p>
                                     </div>
                                     <div>
-                                        <label className="font-semibold">Created At:</label>
+                                        <label className="font-semibold block">Created At:</label>
                                         <p>
                                             {new Date(userData.created_at).toLocaleString("id-ID", {
                                                 timeZone: "Asia/Jakarta",
@@ -122,14 +122,14 @@ export default function Dashboard() {
                             </div>
                             <button
                                 onClick={handleLogout}
-                                className="mt-6 w-full py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition"
+                                className="mt-4 md:mt-6 w-full py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition"
                             >
                                 Logout
                             </button>
                         </div>
 
-                        <div className="w-1/2 flex flex-col justify-center items-center border-l border-blue-200 pl-8">
-                            <h3 className="text-2xl font-semibold text-blue-800 mb-4">
+                        <div className="w-full md:w-1/2 flex flex-col justify-center items-center border-t md:border-l border-blue-200 pt-6 md:pt-0 md:pl-8">
+                            <h3 className="text-xl md:text-2xl font-semibold text-blue-800 mb-4">
                                 Top Up Balance
                             </h3>
                             <input
@@ -149,28 +149,28 @@ export default function Dashboard() {
                     </div>
 
                     <div>
-                        <h3 className="text-2xl font-semibold text-blue-800 mb-4">Transaction History</h3>
-                        <div className="overflow-y-auto max-h-60 border border-blue-200 rounded-lg">
+                        <h3 className="text-xl md:text-2xl font-semibold text-blue-800 mb-4">Transaction History</h3>
+                        <div className="overflow-x-auto border border-blue-200 rounded-lg">
                             {transactions.length === 0 ? (
                                 <p className="p-4 text-gray-600">No transactions found.</p>
                             ) : (
-                                <table className="w-full text-left border-collapse">
+                                <table className="w-full text-left border-collapse text-sm md:text-base">
                                     <thead className="bg-blue-100 text-blue-800">
                                         <tr>
-                                            <th className="border-b p-2">Item</th>
-                                            <th className="border-b p-2">Quantity</th>
+                                            <th className="border-b p-2 hidden md:table-cell">Item</th>
+                                            <th className="border-b p-2 hidden md:table-cell">Quantity</th>
                                             <th className="border-b p-2">Total</th>
-                                            <th className="border-b p-2">Status</th>
+                                            <th className="border-b p-2 hidden md:table-cell">Status</th>
                                             <th className="border-b p-2">Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {transactions.map((transaction) => (
                                             <tr key={transaction.id} className="hover:bg-blue-50">
-                                                <td className="border-b p-2">{transaction.item.name}</td>
-                                                <td className="border-b p-2">{transaction.quantity}</td>
+                                                <td className="border-b p-2 hidden md:table-cell">{transaction.item.name}</td>
+                                                <td className="border-b p-2 hidden md:table-cell">{transaction.quantity}</td>
                                                 <td className="border-b p-2">Rp {transaction.total.toLocaleString()}</td>
-                                                <td className="border-b p-2">{transaction.status}</td>
+                                                <td className="border-b p-2 hidden md:table-cell">{transaction.status}</td>
                                                 <td className="border-b p-2">
                                                     {new Date(transaction.created_at).toLocaleString("id-ID", {
                                                         timeZone: "Asia/Jakarta",

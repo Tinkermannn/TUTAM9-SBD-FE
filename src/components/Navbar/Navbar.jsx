@@ -60,9 +60,10 @@ export default function Navbar() {
                 <div className="py-3 w-screen flex justify-between items-center rounded-md flex-1">
 
                     <div className="w-full h-full flex select-none flex-row justify-between items-center">
-                        <div onClick={() => navigate("/")} className="w-28 h-full flex flex-row items-center gap-3">
-                            <img src={Logo} className="w-28" />
+                        <div onClick={() => navigate("/")} className="w-28 hidden lg:flex md:flex  h-full flex-row items-center gap-3">
+                            <img src={Logo} className="hidden md:block lg:block w-28" />
                         </div>
+
                         <div onClick={() => navigate("/")} className="w-36 h-full flex flex-row items-center gap-3">
                             <a className="text-white text-lg flex font-semibold cursor-pointer">Madura Store</a>
                         </div>

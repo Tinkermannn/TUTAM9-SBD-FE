@@ -15,7 +15,7 @@ export default function Home() {
             >
                 <div className="w-full h-full bg-gradient-to-r from-black/40 via-blue-800/30 to-black/40">
                     <div className="w-full h-full items-center flex m-auto max-w-screen-2xl px-4 sm:px-8 md:px-20">
-                        <div className="w-full h-[200px] py-6 md:py-10">
+                        <div className="w-full h-[100px] md:h-[200px] lg:h-[200px] py-6 md:py-10">
                             <div className="w-full md:w-[50%] h-full flex flex-col gap-2 text-left">
                                 <a className="w-full h-full font-bold text-white text-2xl lg:text-7xl sm:text-3xl md:text-[3rem]">
                                     Madura Store

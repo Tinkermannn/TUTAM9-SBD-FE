@@ -88,19 +88,23 @@ export default function Checkout() {
 
   return (
     <>
-      <div className="w-full min-h-screen flex items-center justify-center bg-blue-200 px-20 pt-20">
-        <div className="w-full max-w-screen-2xl bg-white shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-10">
-          <div>
-            <img src={item.image_url} alt={item.name} className="w-full h-64 object-cover rounded-lg mb-4" />
-            <h1 className="text-2xl font-bold mb-2">{item.name}</h1>
+      <div className="w-full h-screen flex items-center justify-center bg-blue-200 max-md:px-4 max-md:pt-16 max-md:min-h-full px-20 pt-20">
+        <div className="w-full max-w-screen-2xl bg-white shadow-md rounded-lg p-6 grid grid-cols-1 md:grid-cols-2 gap-10 max-md:gap-6">
+          <div className="max-md:order-2">
+            <img 
+              src={item.image_url} 
+              alt={item.name} 
+              className="w-full h-64 object-cover rounded-lg mb-4 max-md:h-48" 
+            />
+            <h1 className="text-2xl font-bold mb-2 max-md:text-xl">{item.name}</h1>
             <p className="text-gray-600 mb-1">Harga: <strong>IDR {parseFloat(item.price).toLocaleString('id-ID')}</strong></p>
             <p className="text-gray-500 mb-1">Stock: {item.stock}</p>
             <p className="text-gray-500 mb-1">Store: {store?.name}</p>
           </div>
 
           {/* RIGHT - Checkout Summary */}
-          <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 shadow-sm">
-            <h2 className="text-xl font-semibold mb-4">Ringkasan Pembelian</h2>
+          <div className="border border-gray-200 rounded-lg p-6 bg-gray-50 shadow-sm max-md:order-1">
+            <h2 className="text-xl font-semibold mb-4 max-md:text-lg">Ringkasan Pembelian</h2>
 
             {/* Quantity control */}
             <div className="flex items-center justify-between mb-4">
