@@ -67,8 +67,7 @@ export default function Dashboard() {
         }
 
         try {
-            const response = await axios.post(
-                `http://localhost:3000/user/topUp?id=${userData.id}&amount=${amount}`,
+            const response = await axios.post(`${import.meta.env.VITE_API}/user/topUp?id=${userData.id}&amount=${amount}`,
                 {},
                 {
                     headers: {

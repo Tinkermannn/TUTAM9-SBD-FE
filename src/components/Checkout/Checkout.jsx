@@ -61,7 +61,7 @@ export default function Checkout() {
         user_id,
       });
 
-      const transactionResponse = await axios.post("http://localhost:3000/transaction/create", {
+      const transactionResponse = await axios.post(`${import.meta.env.VITE_API}transaction/create`, {
         item_id: item.id,
         quantity,
         user_id,
@@ -69,7 +69,7 @@ export default function Checkout() {
 
       console.log("DEBUG - Response dari /transaction/create:", transactionResponse.data);
 
-      await axios.post(`http://localhost:3000/transaction/pay/${transactionResponse.data.payload.id}`);
+      await axios.post(`${import.meta.env.VITE_API}transaction/pay/${transactionResponse.data.payload.id}`);
       toast.success("Pembayaran berhasil!");
       setTimeout(() => {
         window.location.reload();
