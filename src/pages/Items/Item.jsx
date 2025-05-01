@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom"; // Import useNavigate
 import Loading from "../../components/Loading/Loading";
 import ReactPaginate from "react-paginate";
+import { toast, ToastContainer, Slide } from "react-toastify";
 
 export default function Item() {
   const [items, setItems] = useState([]);
@@ -44,65 +45,81 @@ export default function Item() {
     const user = localStorage.getItem("token");
 
     if (!user) {
-      alert("You need to log in to proceed with checkout.");
-      navigate("/user/login");
+      toast.info("You need to log in first.", {
+        autoClose: 2000,
+      });
+      setTimeout(() => {
+        navigate("/user/login");
+      }, 2000);
     } else {
       navigate(`/item/checkout/${item.id}`);
     }
+    
   };
 
   return (
-    <div className="w-full h-auto m-auto flex flex-col bg-gradient-to-tr from-blue-400 via-sky-500 to-blue-400">
-      <div className="w-full h-full px-10 lg:px-20 flex items-center m-auto max-w-screen-2xl flex-row gap-10 my-10">
-        <div className="w-full h-full flex flex-col items-center gap-5">
-          <div className="text-sm lg:text-3xl font-bold text-white">Gallery</div>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full max-w-screen-xl">
-            {currentItems.map((item) => (
-              <div
-                key={item.id}
-                className="bg-gradient-to-t from-blue-600 via-sky-600 to-sky-500 rounded-lg shadow-md hover:shadow-xl transition-all h-auto flex flex-col shadow-black/20 overflow-hidden relative"
-              >
-                <img
-                  src={item.image_url}
-                  className="mb-1 object-cover w-full h-48"
-                  alt={item.name}
-                />
-                <div className="h-auto p-5">
-                  <h3 className="text-sm lg:text-xl font-bold text-white mb-2">{item.name}</h3>
-                  <p className="text-white text-xs lg:text-sm">Price: Rp{item.price.toLocaleString()}</p>
-                  <p className="text-white text-xs lg:text-sm">Stock: {item.stock}</p>
-                </div>
-
-                {/* Buy Button */}
-                <button
-                  onClick={() => handleBuy(item)}
-                  className="absolute bottom-3 right-3 bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-md font-semibold transition-all"
+    <>
+      <div className="w-full h-auto m-auto flex flex-col bg-gradient-to-tr from-blue-400 via-sky-500 to-blue-400">
+        <div className="w-full h-full px-10 lg:px-20 flex items-center m-auto max-w-screen-2xl flex-row gap-10 my-10">
+          <div className="w-full h-full flex flex-col items-center gap-5">
+            <div className="text-sm lg:text-3xl font-bold text-white">Gallery</div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 w-full max-w-screen-xl">
+              {currentItems.map((item) => (
+                <div
+                  key={item.id}
+                  className="bg-gradient-to-t from-blue-600 via-sky-600 to-sky-500 rounded-lg shadow-md hover:shadow-xl transition-all h-auto flex flex-col shadow-black/20 overflow-hidden relative"
                 >
-                  Buy
-                </button>
-              </div>
-            ))}
-          </div>
+                  <img
+                    src={item.image_url || "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"}
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg";
+                    }}
+                    className="mb-1 object-cover w-full h-48 bg-white"
+                    alt={item.name}
+                  />
 
-          <div className="flex justify-center mt-10">
-            <ReactPaginate
-              previousLabel={"Back"}
-              nextLabel={"Next"}
-              breakLabel={"..."}
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={3}
-              onPageChange={handlePageClick}
-              containerClassName={"flex space-x-2"}
-              pageClassName={"px-3 py-2 border rounded-lg cursor-pointer text-white border-white"}
-              activeClassName={"bg-white text-fuchsia-800 font-bold"}
-              previousClassName={"px-3 py-2 border rounded-lg cursor-pointer text-white border-white"}
-              nextClassName={"px-3 py-2 border rounded-lg cursor-pointer text-white border-white"}
-              breakClassName={"px-3 py-2 text-white"}
-            />
+                  <div className="h-auto p-5">
+                    <h3 className="text-sm lg:text-xl font-bold text-white mb-2">{item.name}</h3>
+                    <p className="text-white text-xs lg:text-sm">Price: Rp{item.price.toLocaleString()}</p>
+                    <p className="text-white text-xs lg:text-sm">Stock: {item.stock}</p>
+                  </div>
+
+                  {/* Buy Button */}
+                  <button
+                    onClick={() => handleBuy(item)}
+                    className="absolute bottom-3 right-3 bg-blue-500 hover:bg-blue-600 text-white text-sm py-1 px-3 rounded-md font-semibold transition-all"
+                  >
+                    Buy
+                  </button>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex justify-center mt-10">
+              <ReactPaginate
+                previousLabel={"Back"}
+                nextLabel={"Next"}
+                breakLabel={"..."}
+                pageCount={pageCount}
+                marginPagesDisplayed={2}
+                pageRangeDisplayed={3}
+                onPageChange={handlePageClick}
+                containerClassName={"flex space-x-2"}
+                pageClassName={"px-3 py-2 border rounded-lg cursor-pointer text-white border-white"}
+                activeClassName={"bg-white text-fuchsia-800 font-bold"}
+                previousClassName={"px-3 py-2 border rounded-lg cursor-pointer text-white border-white"}
+                nextClassName={"px-3 py-2 border rounded-lg cursor-pointer text-white border-white"}
+                breakClassName={"px-3 py-2 text-white"}
+              />
+            </div>
           </div>
         </div>
       </div>
-    </div>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        limit={3} />
+    </>
   );
 }
