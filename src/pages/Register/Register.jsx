@@ -32,7 +32,7 @@ export default function Register() {
 
         try {
             const response = await toast.promise(
-                axios.post(`http://localhost:3000/user/register`, null, {
+                axios.post(`${import.meta.env.VITE_API}user/register`, null, {
                     params: {
                         name,
                         email,

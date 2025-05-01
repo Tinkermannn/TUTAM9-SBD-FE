@@ -15,11 +15,11 @@ export default function Checkout() {
 
   const fetchData = async () => {
     try {
-      const itemRes = await axios.get(`http://localhost:3000/item/byId/${item_id}`);
+      const itemRes = await axios.get(`${import.meta.env.VITE_API}item/byId/${item_id}`);
       const storeId = itemRes.data.payload.store_id;
       if (!storeId) throw new Error("Store ID tidak ditemukan.");
 
-      const storeRes = await axios.get(`http://localhost:3000/store/${storeId}`);
+      const storeRes = await axios.get(`${import.meta.env.VITE_API}store/${storeId}`);
       if (storeRes.data.success && storeRes.data.payload) {
         setItem(itemRes.data.payload);
         setStore(storeRes.data.payload);

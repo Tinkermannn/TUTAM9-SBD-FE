@@ -18,7 +18,7 @@ export default function Login() {
 
         try {
             const response = await toast.promise(
-                axios.post(`http://localhost:3000/user/login`, null, {
+                axios.post(`${import.meta.env.VITE_API}user/login`, null, {
                     params: { email, password }
                 }),
                 {

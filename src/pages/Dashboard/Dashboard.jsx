@@ -27,14 +27,14 @@ export default function Dashboard() {
 
         const fetchUserData = async () => {
             try {
-                const response = await axios.get(`http://localhost:3000/user/${email}`, {
+                const response = await axios.get(`${import.meta.env.VITE_API}user/${email}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setUserData(response.data.payload);
 
-                const transactionResponse = await axios.get("http://localhost:3000/transaction", {
+                const transactionResponse = await axios.get(`${import.meta.env.VITE_API}transaction`, {
                     headers: { Authorization: `Bearer ${token}` },
-                });
+                }); 
 
                 const userTransactions = transactionResponse.data.payload.filter(
                     (transaction) => transaction.user_id === response.data.payload.id
