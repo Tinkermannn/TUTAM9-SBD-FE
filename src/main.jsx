@@ -5,9 +5,10 @@ import { Navigate, createBrowserRouter, RouterProvider } from "react-router-dom"
 import "./index.css";
 import App from "./App.jsx";
 import Home from "./pages/HomePage.jsx";
-import OS from './pages/OS.jsx'
-import SBD from "./pages/SBD.jsx";
-import DMJ from "./pages/DMJ.jsx";
+import Login from "./pages/Login/Login.jsx";
+import Register from "./pages/Register/Register.jsx";
+import Dashboard from "./pages/Dashboard/Dashboard.jsx";
+import Checkout from "./components/Checkout/Checkout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -18,16 +19,20 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path: "/os",
-        element: <OS />,
+        path: "/user/login",
+        element: <Login />,
       },
       {
-        path: "/sbd",
-        element: <SBD />,
+        path: "/user/register",
+        element: <Register />,
       },
       {
-        path: "/dmj",
-        element: <DMJ />,
+        path: "/user/dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "/item/checkout/:item_id",
+        element: <Checkout />,
       },
     ],
   },

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Logo from '../../assets/Navbar/Logo.svg';
+import Logo from '../../assets/LogoMadura.png';
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -30,15 +30,15 @@ export default function Navbar() {
     };
 
     const listStyle =
-        "text-white text-lg font-medium h-12 flex flex-1 basis-32 max-w-32 items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-pink-400/80 hover:scale-105 active:bg-pink-500/80 focus:ring-white";
-    
+        "text-white text-lg font-medium h-12 flex flex-1 basis-32 max-w-32 items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-blue-400/80 hover:scale-105 active:bg-blue-500/80 focus:ring-white";
+
     const mobileListStyle =
-        "text-white text-xl font-medium w-full py-4 flex items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-pink-400/80 active:bg-pink-500/80";
+        "text-white text-xl font-medium w-full py-4 flex items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-blue-400/80 active:bg-blue-500/80";
 
     const menu = [
-        { text: "OS", path: "/os" },
-        { text: "SBD", path: "/sbd" },
-        { text: "DMJ", path: "/dmj" },
+        { text: "Login", path: "/user/login" },
+        { text: "Register", path: "/user/register" },
+        { text: "Dashboard", path: "/user/dashboard" },
     ];
 
     // Burger menu icon
@@ -54,16 +54,19 @@ export default function Navbar() {
         <>
             {/* Desktop Navbar - Transparent at top */}
             <div
-                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-20 transition-all duration-500 ${
-                    scrolling ? "hidden" : "bg-transparent"
-                }`}
+                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-20 transition-all duration-500 ${scrolling ? "hidden" : "bg-transparent"
+                    }`}
             >
                 <div className="py-3 w-screen flex justify-between items-center rounded-md flex-1">
+
                     <div className="w-full h-full flex select-none flex-row justify-between items-center">
-                        <div onClick={() => navigate("/")} className="w-full h-full flex cursor-pointer">
-                            <ul className="flex-auto text-white text-lg font-bold">Wilman Saragih Sitio</ul>
+                        <div onClick={() => navigate("/")} className="w-28 h-full flex flex-row items-center gap-3">
+                            <img src={Logo} className="w-28" />
                         </div>
-                        
+                        <div onClick={() => navigate("/")} className="w-36 h-full flex flex-row items-center gap-3">
+                            <a className="text-white text-lg flex font-semibold cursor-pointer">Madura Store</a>
+                        </div>
+
                         {/* Desktop Menu */}
                         <div className="hidden md:block w-full h-full items-center justify-center">
                             <ul className="list-none w-auto flex justify-end cursor-pointer">
@@ -76,7 +79,7 @@ export default function Navbar() {
                                 ))}
                             </ul>
                         </div>
-                        
+
                         {/* Mobile Burger Button */}
                         <div className="md:hidden flex justify-end">
                             <button onClick={toggleMobileMenu} className="focus:outline-none" aria-label="Toggle menu">
@@ -92,17 +95,17 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={controls}
                 transition={{ duration: 0.1 }}
-                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-30 ${
-                    scrolling ? "block" : "hidden"
-                }`}
+                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-30 ${scrolling ? "block" : "hidden"
+                    }`}
             >
                 <div className="fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-30">
-                    <div className="bg-black px-5 py-3 w-screen flex justify-between items-center rounded-md drop-shadow-lg">
+                    <div className="bg-gradient-to-b from-blue-700 via-sky-500 to-blue-400 px-5 py-3 w-screen flex justify-between items-center rounded-md drop-shadow-lg">
                         <div className="w-full h-15 flex select-none items-center">
-                            <div onClick={() => navigate("/")} className="w-full h-full">
-                                <a className="text-white text-lg font-normal cursor-pointer">Wilman Saragih Sitio</a>
+                            <div onClick={() => navigate("/")} className="w-full h-full flex flex-row items-center">
+                                <img src={Logo} className="w-14 flex" />
+                                <a className="text-white text-lg flex font-normal cursor-pointer">Madura Store</a>
                             </div>
-                            
+
                             {/* Desktop Menu */}
                             <div className="hidden md:block w-full h-full items-center justify-center">
                                 <ul className="list-none w-full flex justify-end cursor-pointer">
@@ -115,7 +118,7 @@ export default function Navbar() {
                                     ))}
                                 </ul>
                             </div>
-                            
+
                             {/* Mobile Burger Button */}
                             <div className="md:hidden flex justify-end">
                                 <button onClick={toggleMobileMenu} className="focus:outline-none" aria-label="Toggle menu">
@@ -139,9 +142,9 @@ export default function Navbar() {
                     >
                         <div className="flex flex-col items-center w-full">
                             {menu.map((item) => (
-                                <Link 
-                                    key={item.text} 
-                                    to={item.path} 
+                                <Link
+                                    key={item.text}
+                                    to={item.path}
                                     className={mobileListStyle}
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
