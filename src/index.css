@@ -13,10 +13,10 @@ background: #f1f1f1;
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-background: #316ee8; 
+background: #ff7f32; 
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-background: #165ff2; 
+background: #e55d10; 
 } 
