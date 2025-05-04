@@ -95,13 +95,13 @@ export default function Profile() {
     };
 
     return (
-        <div className="w-full h-screen m-auto flex items-center justify-center">
-            <div className="w-full max-w-screen-2xl h-fit px-20 mt-20">
-                <div className="flex flex-col md:flex-row">
-                    <div className="w-full md:w-1/3 bg-gradient-to-br from-orange-600 to-orange-400 p-5 text-white rounded-l-xl">
+        <div className="w-full min-h-screen md:h-screen lg:min-h-screen m-auto flex items-center justify-center">
+            <div className="w-full max-w-screen-2xl h-fit px-4 md:px-20 lg:px-20 md:mt-20 py-24">
+                <div className="flex flex-col md:flex-row rounded-xl overflow-hidden shadow-lg">
+                    <div className="w-full md:w-1/3 lg:w-1/3 bg-gradient-to-br from-orange-600 to-orange-400 p-5 text-white rounded-t-xl md:rounded-t-none md:rounded-l-xl">
                         <div className="flex flex-col items-center">
                             <div className="relative group mb-6">
-                                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white shadow-md">
+                                <div className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-md mx-auto">
                                     {(previewImage || userData.profile_image_url) ? (
                                         <img
                                             src={previewImage || userData.profile_image_url}
@@ -118,17 +118,17 @@ export default function Profile() {
                                 </div>
                                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
                                     <label htmlFor="file-input" className="w-full h-full cursor-pointer flex items-center justify-center rounded-full bg-black bg-opacity-40">
-                                        <span className="text-white text-sm">Change Photo</span>
+                                        <span className="text-white text-xs md:text-md">Change Photo</span>
                                     </label>
                                 </div>
                             </div>
 
-                            <h3 className="text-2xl font-bold mb-1">{userData.username}</h3>
-                            <p className="text-orange-200 mb-6">{userData.email}</p>
+                            <h3 className="text-xl md:text-2xl font-bold mb-1 text-center">{userData.username}</h3>
+                            <p className="text-orange-200 mb-6 text-center text-md md:text-base break-words">{userData.email}</p>
 
                             <button
                                 onClick={handleLogout}
-                                className="w-full py-2 px-4 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition-flex items-center justify-center gap-2"
+                                className="w-full py-2 px-4 bg-red-500 text-white font-medium rounded-lg hover:bg-red-600 transition flex items-center justify-center gap-2"
                             >
                                 Logout
                             </button>
@@ -136,25 +136,25 @@ export default function Profile() {
                     </div>
 
                     
-                    <div className="w-full md:w-2/3 p-5">
-                        <h2 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <div className="w-full md:w-2/3 p-5 bg-white">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800 mb-4 md:mb-6 flex items-center">
                             Profile Details
                         </h2>
 
-                        <div className="space-y-6">
-                            <div className="bg-gray-50 p-2 rounded-lg shadow-sm">
-                                <span className="text-sm text-gray-500">Username</span>
-                                <p className="text-lg font-medium text-gray-800">{userData.username}</p>
+                        <div className="space-y-4 md:space-y-6">
+                            <div className="bg-gray-50 p-3 rounded-lg shadow-md">
+                                <span className="text-xs md:text-md text-gray-500">Username</span>
+                                <p className="text-base md:text-lg font-medium text-gray-800">{userData.username}</p>
                             </div>
 
-                            <div className="bg-gray-50 p-2 rounded-lg shadow-sm">
-                                <span className="text-sm text-gray-500">Email</span>
-                                <p className="text-lg font-medium text-gray-800">{userData.email}</p>
+                            <div className="bg-gray-50 p-3 rounded-lg shadow-md">
+                                <span className="text-xs md:text-md text-gray-500">Email</span>
+                                <p className="text-base md:text-lg font-medium text-gray-800 break-words">{userData.email}</p>
                             </div>
 
-                            <div className="bg-gray-50 p-2 rounded-lg shadow-sm">
-                                <span className="text-sm text-gray-500">Account Created</span>
-                                <p className="text-lg font-medium text-gray-800">
+                            <div className="bg-gray-50 p-3 rounded-lg shadow-md">
+                                <span className="text-xs md:text-md text-gray-500">Account Created</span>
+                                <p className="text-md md:text-lg font-medium text-gray-800">
                                     {new Date(userData.created_at).toLocaleString("id-ID", {
                                         timeZone: "Asia/Jakarta",
                                         dateStyle: "long",
@@ -163,8 +163,8 @@ export default function Profile() {
                                 </p>
                             </div>
 
-                            <div className="bg-gray-50 p-2 rounded-lg shadow-sm">
-                                <span className="text-sm text-gray-500 mb-2">Profile Image</span>
+                            <div className="bg-gray-50 p-3 rounded-lg shadow-md">
+                                <span className="text-xs md:text-md text-gray-500 mb-2 block">Profile Image</span>
                                 <input
                                     id="file-input"
                                     type="file"
@@ -172,9 +172,9 @@ export default function Profile() {
                                     onChange={handleImageChange}
                                     className="hidden"
                                 />
-                                <div className="flex flex-col sm:flex-row gap-2 items-start sm:items-center">
+                                <div className="flex flex-col md:flex-row gap-3 items-start md:items-center">
                                     {previewImage && (
-                                        <div className="w-20 h-20 rounded-lg overflow-hidden shadow-md">
+                                        <div className="w-16 h-16 md:w-20 md:h-20 rounded-lg overflow-hidden shadow-md">
                                             <img
                                                 src={previewImage}
                                                 alt="Preview"
@@ -182,10 +182,10 @@ export default function Profile() {
                                             />
                                         </div>
                                     )}
-                                    <div className="flex flex-col sm:flex-row gap-2">
+                                    <div className="flex flex-col md:flex-row gap-2 w-full md:w-auto">
                                         <label
                                             htmlFor="file-input"
-                                            className="py-2 px-4 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition cursor-pointer flex items-center justify-center gap-1"
+                                            className="py-2 px-4 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition cursor-pointer flex items-center justify-center gap-1 text-md"
                                         >
                                             Select Image
                                         </label>
@@ -193,7 +193,7 @@ export default function Profile() {
                                             <button
                                                 onClick={handleImageUpload}
                                                 disabled={isLoading}
-                                                className={`py-2 px-4 ${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white rounded-lg transition flex items-center justify-center gap-1`}
+                                                className={`py-2 px-4 ${isLoading ? 'bg-gray-400' : 'bg-orange-500 hover:bg-orange-600'} text-white rounded-lg transition flex items-center justify-center gap-1 text-md`}
                                             >
                                                 {isLoading ? 'Uploading...' : 'Upload Image'}
                                             </button>

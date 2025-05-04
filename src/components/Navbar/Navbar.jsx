@@ -61,9 +61,9 @@ export default function Navbar() {
     // Burger menu icon
     const BurgerMenuIcon = ({ isOpen }) => (
         <div className="flex flex-col justify-center items-center w-8 h-8 cursor-pointer">
-            <span className={`block w-6 h-0.5 bg-white mb-1.5 transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-white mb-1.5 transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
-            <span className={`block w-6 h-0.5 bg-white transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-black mb-1.5 transition-transform ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-black mb-1.5 transition-opacity ${isOpen ? 'opacity-0' : ''}`}></span>
+            <span className={`block w-6 h-0.5 bg-black transition-transform ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
         </div>
     );
 
@@ -100,7 +100,7 @@ export default function Navbar() {
 
                         {/* Mobile Burger Button */}
                         <div className="md:hidden flex justify-end">
-                            <button onClick={toggleMobileMenu} className="focus:outline-none" aria-label="Toggle menu">
+                            <button onClick={toggleMobileMenu} className="focus:outline-none " aria-label="Toggle menu">
                                 <BurgerMenuIcon isOpen={mobileMenuOpen} />
                             </button>
                         </div>
@@ -156,7 +156,7 @@ export default function Navbar() {
                         animate={{ opacity: 1, height: "auto" }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="fixed top-16 left-0 w-full z-40 px-4 py-2 rounded-b-lg shadow-lg"
+                        className="fixed top-16 left-0 w-full z-40 px-4 py-2 rounded-b-lg shadow-lg bg-white"
                     >
                         <div className="flex flex-col items-center w-full">
                             {menu.map((item) => (

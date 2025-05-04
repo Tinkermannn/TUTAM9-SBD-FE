@@ -85,8 +85,7 @@ export default function AllToDo() {
     }
 
     return (
-        <div className="w-3/4 h-full bg-white flex flex-col gap-3 rounded-r-xl overflow-hidden">
-            {/* Header */}
+        <div className="w-full md:w/34 lg:w3/4 h-full bg-white flex flex-col gap-3 rounded-r-xl overflow-hidden">
             <div className="flex flex-row gap-2 bg-white items-center mb-3 pl-5 py-3 shadow-sm shadow-black/40">
                 <Home size={24} />
                 <span className="font-bold text-2xl capitalize">
@@ -94,7 +93,6 @@ export default function AllToDo() {
                 </span>
             </div>
 
-            {/* Content */}
             <div className="flex-1 overflow-auto">
                 {activePage === "all" ? (
                     <div className="flex flex-col gap-2 p-5 bg-gray-50">
@@ -137,7 +135,6 @@ export default function AllToDo() {
                                         </p>
                                     </div>
 
-                                    {/* Actions */}
                                     <div className="flex flex-col gap-2 ml-4">
                                         <Edit2
                                             className="cursor-pointer text-blue-500 hover:text-blue-700"

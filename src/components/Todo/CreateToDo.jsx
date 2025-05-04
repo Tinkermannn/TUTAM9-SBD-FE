@@ -47,7 +47,7 @@ export default function CreateTodoPage({ onSubmit }) {
     };
 
     return (
-        <div className="w-3/4 h-full bg-white flex flex-col gap-3 rounded-r-xl overflow-hidden">
+        <div className="w-full md:w-3/4 lg:w-3/4 h-full bg-white flex flex-col gap-3 rounded-r-xl overflow-hidden">
             <div className="flex flex-row gap-2 bg-white items-center text-black mb-3 pl-5 py-3 shadow-sm shadow-black/40">
                 <span className="font-bold text-2xl">Create To-Do</span>
             </div>
