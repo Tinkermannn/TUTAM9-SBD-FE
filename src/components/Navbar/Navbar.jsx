@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, useAnimation, AnimatePresence } from "framer-motion";
-import { useNavigate } from "react-router-dom";
-import Logo from '../../assets/LogoMadura.png';
+import { useNavigate, useLocation} from "react-router-dom";
+import Logo from '../../assets/todologo.png';
 import { Link } from "react-router-dom";
 
 export default function Navbar() {
@@ -9,8 +9,18 @@ export default function Navbar() {
     const controls = useAnimation();
     const [scrolling, setScrolling] = useState(false);
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const [userId, setUserId] = useState(null);
+    const location = useLocation();
 
     useEffect(() => {
+        const user = localStorage.getItem("user_id");
+        setUserId(user); // ini akan selalu update saat route berubah
+    }, [location]);
+
+    useEffect(() => {
+        const user = localStorage.getItem("user_id");
+        if (user) setUserId(user);
+
         const handleScroll = () => {
             if (window.scrollY > 50) {
                 setScrolling(true);
@@ -30,16 +40,23 @@ export default function Navbar() {
     };
 
     const listStyle =
-        "text-white text-lg font-medium h-12 flex flex-1 basis-32 max-w-32 items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-blue-400/80 hover:scale-105 active:bg-blue-500/80 focus:ring-white";
+        "text-black text-lg font-medium h-12 flex flex-1 basis-32 max-w-32 items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-orange-400/80 hover:scale-105 active:bg-orange-500/80 focus:ring-white";
 
     const mobileListStyle =
-        "text-white text-xl font-medium w-full py-4 flex items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-blue-400/80 active:bg-blue-500/80";
+        "text-black text-xl font-medium w-full py-4 flex items-center justify-center rounded-md transition-all delay-75 cursor-pointer hover:bg-orange-400/80 active:bg-orange-500/80";
+    
 
-    const menu = [
-        { text: "Login", path: "/user/login" },
-        { text: "Register", path: "/user/register" },
-        { text: "Dashboard", path: "/user/dashboard" },
-    ];
+
+        const menu = userId
+        ? [
+            { text: "Dashboard", path: `/user/dashboard/${userId}`},
+            { text: "Profile", path: `/user/profile/${userId}`},
+        ]
+        : [
+            { text: "Login", path: "/user/login" },
+            { text: "Register", path: "/user/register" },
+        ];
+    
 
     // Burger menu icon
     const BurgerMenuIcon = ({ isOpen }) => (
@@ -54,18 +71,18 @@ export default function Navbar() {
         <>
             {/* Desktop Navbar - Transparent at top */}
             <div
-                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-20 transition-all duration-500 ${scrolling ? "hidden" : "bg-transparent"
+                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 pt-5 z-20 transition-all duration-500 ${scrolling ? "hidden" : "bg-transparent"
                     }`}
             >
                 <div className="py-3 w-screen flex justify-between items-center rounded-md flex-1">
 
                     <div className="w-full h-full flex select-none flex-row justify-between items-center">
                         <div onClick={() => navigate("/")} className="w-28 hidden lg:flex md:flex  h-full flex-row items-center gap-3">
-                            <img src={Logo} className="hidden md:block lg:block w-28" />
+                            <img src={Logo} className="hidden md:block lg:block w-20" />
                         </div>
 
                         <div onClick={() => navigate("/")} className="w-36 h-full flex flex-row items-center gap-3">
-                            <a className="text-white text-lg flex font-semibold cursor-pointer">Madura Store</a>
+                            <a className="text-black text-lg flex font-semibold cursor-pointer"><b className="text-2xl">TOD</b>os</a>
                         </div>
 
                         {/* Desktop Menu */}
@@ -96,15 +113,15 @@ export default function Navbar() {
                 initial={{ opacity: 0, y: -20 }}
                 animate={controls}
                 transition={{ duration: 0.1 }}
-                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-30 ${scrolling ? "block" : "hidden"
+                className={`fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-30 ${scrolling ? "flex" : "hidden"
                     }`}
             >
                 <div className="fixed top-0 w-full flex justify-center items-center px-4 md:px-20 py-5 z-30">
-                    <div className="bg-gradient-to-b from-blue-700 via-sky-500 to-blue-400 px-5 py-3 w-screen flex justify-between items-center rounded-md drop-shadow-lg">
+                    <div className="bg-gradient-to-b from-orange-700 via-orange-500 to-orange-400 px-5 py-3 w-screen flex justify-between items-center rounded-md drop-shadow-lg">
                         <div className="w-full h-15 flex select-none items-center">
                             <div onClick={() => navigate("/")} className="w-full h-full flex flex-row items-center">
                                 <img src={Logo} className="w-14 flex" />
-                                <a className="text-white text-lg flex font-normal cursor-pointer">Madura Store</a>
+                                <a className="text-black text-lg flex font-normal cursor-pointer"><b className="text-2xl">TOD</b>os</a>
                             </div>
 
                             {/* Desktop Menu */}

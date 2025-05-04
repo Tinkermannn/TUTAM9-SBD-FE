@@ -18,63 +18,64 @@ export default function Register() {
     const passwordRegex = /^(?=.*[0-9])(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*[a-zA-Z]).{8,}$/;
 
     const handleRegister = async (e) => {
-        e.preventDefault(); // Mencegah form submit default
-
+        e.preventDefault();
+    
         if (password !== confirmPassword) {
-            toast.error("Password tidak cocok.")
+            toast.error("Password tidak cocok.");
             return;
         }
-
+    
         if (!passwordRegex.test(password)) {
-            toast.info("Password harus ≥ 8 karakter, mengandung huruf, angka, dan simbol.");
+            toast.error("Password harus minimal 8 karakter, mengandung huruf, angka, dan simbol.");
             return;
-          }
-
+        }
+    
         try {
+            const payload = {
+                username: name,
+                email,
+                password,
+            };
+    
             const response = await toast.promise(
-                axios.post(`${import.meta.env.VITE_API}user/register`, null, {
-                    params: {
-                        name,
-                        email,
-                        password
-                    }
-                }),
+                axios.post("http://localhost:3000/user/register", payload),
                 {
                     pending: "Registering...",
                     success: "Registration successful",
                 }
             );
-
+    
             await new Promise(resolve => setTimeout(resolve, 1500));
             navigate("/user/login");
-
+    
         } catch (error) {
             console.error(error);
-            toast.error(error.response?.data?.message);
+            toast.error(error.response?.data?.message || "Registration failed");
         }
-        
     };
+    
+    
 
     return (
         <>
-            <div className="w-full min-h-screen m-auto flex bg-gradient-to-bl from-blue-600 via-sky-500 to-blue-400 max-md:px-4 max-md:py-8 max-md:items-center max-md:justify-center">
+            <div className="w-full min-h-screen m-auto flex bg-gradient-to-bl from-orange-600 via-sky-500 to-orange-400 max-md:px-4 max-md:py-8 max-md:items-center max-md:justify-center">
                 <div className="w-full h-[600px] px-20 pt-24 flex items-center justify-start m-auto max-w-screen-2xl flex-row gap-0 
                     max-md:h-auto max-md:flex-col max-md:px-0 max-md:pt-0 max-md:w-full max-md:max-w-md">
-                    <div className="w-[50%] h-full rounded-l-xl border-blue-800 border-solid border-2 shadow-xl px-5 py-5 text-left bg-white
+                    <div className="w-[50%] h-full rounded-l-xl border-orange-800 border-solid border-2 shadow-xl px-5 py-5 text-left bg-white
                         max-md:w-full max-md:rounded-xl max-md:h-auto max-md:shadow-lg">
                         <div className="w-full h-[11%] flex items-center flex-col max-md:h-auto max-md:mb-4">
-                            <p className="w-full font-semibold text-blue-800 text-2xl max-md:text-center">
+                            <p className="w-full font-semibold text-black text-2xl max-md:text-center">
                                 Sign Up
                             </p>
-                            <p className="w-full font-normal text-blue-800 text-sm max-md:text-center max-md:mt-2">
+                            <p className="w-full font-normal text-black text-sm max-md:text-center max-md:mt-2">
                                 You can create an account to access our services.
                             </p>
                         </div>
                         <form className="w-full h-[60%] py-5 grid grid-rows-4 gap-20 max-md:h-auto max-md:grid-rows-none max-md:gap-4" onSubmit={handleRegister}>
                             <div className="max-md:px-4">
-                                <label className="font-semibold text-blue-700">Name</label>
+                                <label className="font-semibold text-black">Name</label>
                                 <input
-                                    className="w-full h-10 border-solid border-blue-400 focus:border-blue-700 outline-none border-2 rounded-md py-2 px-2 mt-2"
+                                    className="w-full h-10 border-solid border-orange-400 focus:border-orange-700 outline-none border-2 rounded-md py-2 px-2 mt-2"
                                     type="text"
                                     name="name"
                                     placeholder="John Doe"
@@ -83,9 +84,9 @@ export default function Register() {
                                 />
                             </div>
                             <div className="max-md:px-4">
-                                <label className="font-semibold text-blue-700">Email</label>
+                                <label className="font-semibold text-black">Email</label>
                                 <input
-                                    className="w-full h-10 border-solid border-blue-400 focus:border-blue-700 outline-none border-2 rounded-md py-2 px-2 mt-2"
+                                    className="w-full h-10 border-solid border-orange-400 focus:border-orange-700 outline-none border-2 rounded-md py-2 px-2 mt-2"
                                     type="email"
                                     name="email"
                                     placeholder="example@email.com"
@@ -94,10 +95,10 @@ export default function Register() {
                                 />
                             </div>
                             <div className="max-md:px-4">
-                                <label className="font-semibold text-blue-700">Password</label>
+                                <label className="font-semibold text-black">Password</label>
                                 <div className="w-full flex flex-row justify-end">
                                     <input
-                                        className="w-[100%] h-10 border-solid border-blue-400 border-2 rounded-md py-2 px-2 mt-2 focus:border-blue-700 outline-none"
+                                        className="w-[100%] h-10 border-solid border-orange-400 border-2 rounded-md py-2 px-2 mt-2 focus:border-orange-700 outline-none"
                                         type={showPassword ? "text" : "password"}
                                         name="password"
                                         placeholder="Enter your password"
@@ -111,10 +112,10 @@ export default function Register() {
                                 </div>
                             </div>
                             <div className="max-md:px-4">
-                                <label className="font-semibold text-blue-700">Confirm Password</label>
+                                <label className="font-semibold text-black">Confirm Password</label>
                                 <div className="w-full flex flex-row justify-end">
                                     <input
-                                        className="w-[100%] h-10 border-solid border-blue-400 border-2 rounded-md py-2 px-2 mt-2 focus:border-blue-700 outline-none"
+                                        className="w-[100%] h-10 border-solid border-orange-400 border-2 rounded-md py-2 px-2 mt-2 focus:border-orange-700 outline-none"
                                         type={showConfirmPassword ? "text" : "password"}
                                         name="passwordConfirm"
                                         placeholder="Re-enter your password"
@@ -129,12 +130,12 @@ export default function Register() {
                             </div>
 
                             <div className="flex items-center justify-center mt-1 flex-col max-md:px-4">
-                                <button className="w-full h-10 flex items-center bg-gradient-to-br from-blue-700 to-blue-500 shadow-md rounded-md justify-center" type="submit">
+                                <button className="w-full h-10 flex items-center bg-gradient-to-br from-orange-700 to-orange-500 shadow-md rounded-md justify-center" type="submit">
                                     <p className="text-white font-medium">Sign Up</p>
                                 </button>
                                 <div className="flex h-6 py-2 my-2 w-full justify-center items-center gap-1">
-                                    <a className="text-blue-800">Already have an account?</a>
-                                    <a href="/user/login" className="text-blue-900 font-bold">Login Now!</a>
+                                    <a className="text-black">Already have an account?</a>
+                                    <a href="/user/login" className="text-black font-bold">Login Now!</a>
                                 </div>
                                 <ToastContainer
                                     position="top-center"
@@ -146,7 +147,7 @@ export default function Register() {
                             {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                         </form>
                     </div>
-                    <div className="w-[50%] h-full flex flex-col bg-cover rounded-r-xl bg-gradient-to-r from-blue-600 via-sky-500 to-blue-400 overflow-hidden
+                    <div className="w-[50%] h-full flex flex-col bg-cover rounded-r-xl bg-gradient-to-r from-orange-600 via-sky-500 to-orange-400 overflow-hidden
                         max-md:hidden">
                         <div className="w-full h-full bg-gradient-to-r">
                             <div className="w-full h-full flex items-center justify-center">

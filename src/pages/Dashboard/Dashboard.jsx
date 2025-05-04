@@ -1,195 +1,50 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { Slide, toast, ToastContainer } from "react-toastify";
-import Item from "../Items/Item";
+import React from 'react'
+import { Menu, Home, Plus } from 'react-feather';
+import AllToDo from '../../components/Todo/AllToDo';
+import CreateTodoPage from '../../components/Todo/CreateToDo';
+import { useState } from 'react';
+import { ToastContainer, toast , Slide} from 'react-toastify/unstyled';
 
 export default function Dashboard() {
-    const navigate = useNavigate();
-    const [userData, setUserData] = useState({
-        name: "",
-        email: "",
-        balance: 0,
-        created_at: "",
-    });
-    const [topUpAmount, setTopUpAmount] = useState("");
-    const [transactions, setTransactions] = useState([]);
+    const [activePage, setActivePage] = useState("all");
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-        const email = localStorage.getItem("email");
-
-        if (!token || !email) {
-            toast.warning("You must login first!");
-            navigate("/user/login");
-            return;
-        }
-
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get(`${import.meta.env.VITE_API}user/${email}`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                });
-                setUserData(response.data.payload);
-
-                const transactionResponse = await axios.get(`${import.meta.env.VITE_API}transaction`, {
-                    headers: { Authorization: `Bearer ${token}` },
-                }); 
-
-                const userTransactions = transactionResponse.data.payload.filter(
-                    (transaction) => transaction.user_id === response.data.payload.id
-                );
-                setTransactions(userTransactions);
-            } catch (err) {
-                toast.error("Failed to load user data");
-                console.error(err);
-                navigate("/user/login");
-            }
-        };
-
-        fetchUserData();
-    }, [navigate]);
-
-    const handleLogout = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("email");
-        toast.info("Logged out successfully");
-        navigate("/user/login");
+    const handleTodoSubmit = (todoData) => {
+        toast.info("New To-Do created:", todoData);
+        setActivePage("all"); 
     };
-
-    const handleTopUp = async () => {
-        const token = localStorage.getItem("token");
-        const amount = parseFloat(topUpAmount);
-
-        if (!amount || isNaN(amount) || amount <= 0) {
-            toast.warn("Please enter a valid top-up amount");
-            return;
-        }
-
-        try {
-            const response = await axios.post(`${import.meta.env.VITE_API}user/topUp?id=${userData.id}&amount=${amount}`,
-                {},
-                {
-                    headers: {
-                        Authorization: `Bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                }
-            );
-
-            toast.success("Top up successful!");
-            setUserData((prev) => ({
-                ...prev,
-                balance: response.data.payload.balance,
-            }));
-            setTopUpAmount("");
-        } catch (err) {
-            console.error(err);
-            const errorMsg = err.response?.data?.message || "Top up failed";
-            toast.error(errorMsg);
-        }
-    };
-
     return (
         <>
-            <div className="w-full min-h-screen bg-gradient-to-br from-blue-700 via-sky-500 to-blue-400 flex justify-center px-4 py-8 md:px-20 md:pt-32">
-                <div className="w-full max-w-screen-2xl bg-white rounded-2xl shadow-2xl p-4 md:p-10 flex flex-col gap-6 md:gap-10">
-                    <div className="flex flex-col md:flex-row gap-6 md:gap-8">
-                        <div className="w-full md:w-1/2 flex flex-col justify-between mb-4 md:mb-0">
-                            <div>
-                                <h2 className="text-2xl md:text-3xl font-bold text-blue-800 mb-4 md:mb-6">
-                                    Welcome, {userData.name}
-                                </h2>
-                                <div className="space-y-3 md:space-y-4 text-gray-800">
-                                    <div>
-                                        <label className="font-semibold block">Email:</label>
-                                        <p>{userData.email}</p>
-                                    </div>
-                                    <div>
-                                        <label className="font-semibold block">Balance:</label>
-                                        <p>Rp {userData.balance.toLocaleString()}</p>
-                                    </div>
-                                    <div>
-                                        <label className="font-semibold block">Created At:</label>
-                                        <p>
-                                            {new Date(userData.created_at).toLocaleString("id-ID", {
-                                                timeZone: "Asia/Jakarta",
-                                                hour12: false,
-                                            })}
-                                        </p>
-                                    </div>
+            <div className='w-full h-[800px] m-auto bg-white'>
+                <div className='w-full h-full max-w-screen-2xl pt-16 m-auto flex items-center justify-center'>
+                    <div className='w-full h-full px-20 flex items-center pt-20'>
+                        <div className='w-full h-full flex flex-row items-center pb-20'>
+                            <div className='w-1/4 h-full bg-orange-600 rounded-l-xl flex flex-col'>
+                                <div className='flex flex-row gap-2 items-center text-white mb-3 p-5'>
+                                    <Menu size={24} />
+                                    <a className='font-bold'>To-do Manager</a>
                                 </div>
+                                <button className='flex flex-row gap-2 items-center text-white active:bg-orange-800 hover:bg-orange-500 px-5 py-2 rounded-md' onClick={() => setActivePage("all")}>
+                                    <Home size={24} />
+                                    <a className='font-bold'>All To-Dos</a>
+                                </button>
+                                <button className='flex flex-row gap-2 items-center text-white active:bg-orange-800 hover:bg-orange-500 px-5 py-2 rounded-md' onClick={() => setActivePage("create")}>
+                                    <Plus size={24} />
+                                    <a className='font-bold'>Create To-Do</a>
+                                </button>
                             </div>
-                            <button
-                                onClick={handleLogout}
-                                className="mt-4 md:mt-6 w-full py-2 bg-red-500 text-white font-semibold rounded-md hover:bg-red-600 transition"
-                            >
-                                Logout
-                            </button>
-                        </div>
+                                {activePage === "all" ? <AllToDo /> : <CreateTodoPage onSubmit={handleTodoSubmit} />}
 
-                        <div className="w-full md:w-1/2 flex flex-col justify-center items-center border-t md:border-l border-blue-200 pt-6 md:pt-0 md:pl-8">
-                            <h3 className="text-xl md:text-2xl font-semibold text-blue-800 mb-4">
-                                Top Up Balance
-                            </h3>
-                            <input
-                                type="number"
-                                placeholder="Enter amount"
-                                value={topUpAmount}
-                                onChange={(e) => setTopUpAmount(e.target.value)}
-                                className="w-full px-4 py-2 mb-4 border border-blue-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            />
-                            <button
-                                onClick={handleTopUp}
-                                className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition"
-                            >
-                                Top Up
-                            </button>
                         </div>
                     </div>
-
-                    <div>
-                        <h3 className="text-xl md:text-2xl font-semibold text-blue-800 mb-4">Transaction History</h3>
-                        <div className="overflow-x-auto border border-blue-200 rounded-lg">
-                            {transactions.length === 0 ? (
-                                <p className="p-4 text-gray-600">No transactions found.</p>
-                            ) : (
-                                <table className="w-full text-left border-collapse text-sm md:text-base">
-                                    <thead className="bg-blue-100 text-blue-800">
-                                        <tr>
-                                            <th className="border-b p-2 hidden md:table-cell">Item</th>
-                                            <th className="border-b p-2 hidden md:table-cell">Quantity</th>
-                                            <th className="border-b p-2">Total</th>
-                                            <th className="border-b p-2 hidden md:table-cell">Status</th>
-                                            <th className="border-b p-2">Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {transactions.map((transaction) => (
-                                            <tr key={transaction.id} className="hover:bg-blue-50">
-                                                <td className="border-b p-2 hidden md:table-cell">{transaction.item.name}</td>
-                                                <td className="border-b p-2 hidden md:table-cell">{transaction.quantity}</td>
-                                                <td className="border-b p-2">Rp {transaction.total.toLocaleString()}</td>
-                                                <td className="border-b p-2 hidden md:table-cell">{transaction.status}</td>
-                                                <td className="border-b p-2">
-                                                    {new Date(transaction.created_at).toLocaleString("id-ID", {
-                                                        timeZone: "Asia/Jakarta",
-                                                        hour12: false,
-                                                    })}
-                                                </td>
-                                            </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
-                            )}
-                        </div>
-                    </div>
-
-                    <ToastContainer position="top-center" autoClose={1500} limit={2} transition={Slide} />
                 </div>
+                <ToastContainer
+                position='top-center'
+                autoClose={3000}
+                closeOnClick
+                limit={3}
+                transition={Slide}
+            ></ToastContainer>
             </div>
-
-            <Item />
         </>
-    );
+    )
 }
