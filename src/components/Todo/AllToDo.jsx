@@ -18,7 +18,7 @@ export default function AllToDo() {
         const fetchTodos = async () => {
             try {
                 const res = await axios.get(
-                    `http://localhost:3000/todo/user/${userId}`
+                    `${import.meta.env.VITE_API}todo/user/${userId}`
                 );
                 if (res.data.success) {
                     setTodos(res.data.payload);
@@ -48,7 +48,7 @@ export default function AllToDo() {
         if (!result.isConfirmed) return;
 
         try {
-            await axios.delete(`http://localhost:3000/todo/${id}`);
+            await axios.delete(`${import.meta.env.VITE_API}todo/${id}`);
             setTodos((prev) => prev.filter((t) => t.todo_id !== id));
             toast.success("Todo deleted!");
         } catch (err) {
@@ -106,12 +106,10 @@ export default function AllToDo() {
                                     key={todo.todo_id}
                                     className="relative p-4 bg-white rounded shadow-sm flex justify-between items-center"
                                 >
-                                    {/* Priority Badge */}
                                     <span className="absolute top-2 right-2 bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">
                                         P{todo.priority}
                                     </span>
 
-                                    {/* Todo details */}
                                     <div className="flex-1">
                                         <h3
                                             className={`font-semibold text-lg ${todo.status === 'completed'

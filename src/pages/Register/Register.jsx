@@ -38,7 +38,7 @@ export default function Register() {
             };
     
             const response = await toast.promise(
-                axios.post("http://localhost:3000/user/register", payload),
+                axios.post(`${import.meta.env.VITE_API}user/register`, payload),
                 {
                     pending: "Registering...",
                     success: "Registration successful",

@@ -22,7 +22,7 @@ export default function CreateTodoPage({ onSubmit }) {
         }
 
         try {
-            const response = await axios.post("http://localhost:3000/todo/", {
+            const response = await axios.post(`${import.meta.env.VITE_API}todo/`, {
                 user_id: userId,
                 title,
                 description,

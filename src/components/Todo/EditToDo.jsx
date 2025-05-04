@@ -17,7 +17,8 @@ export default function EditTodoPage({ todo, onSave, onCancel }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.put('http://localhost:3000/todo', formData);
+      const res = await axios.put(`${import.meta.env.VITE_API}todo`, formData);
+
       if (res.data.success) {
         onSave(res.data.payload); // update list
       } else {

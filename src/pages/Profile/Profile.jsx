@@ -29,7 +29,7 @@ export default function Profile() {
 
         const fetchUserData = async () => {
             try {
-                const res = await axios.get(`http://localhost:3000/user/${userId}`, {
+                const res = await axios.get(`${import.meta.env.VITE_API}user/${userId}`, {
                     headers: { Authorization: `Bearer ${userId}` },
                 });
                 setUserData(res.data.payload);
@@ -70,7 +70,7 @@ export default function Profile() {
 
         try {
             const res = await axios.put(
-                `http://localhost:3000/user/update`,
+                `${import.meta.env.VITE_API}user/update`,
                 formData,
                 {
                     headers: {
